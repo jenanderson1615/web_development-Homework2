@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<venues>
+
+	<venue>
+		<name>Country Pines</name>
+		<location>Lincoln</location>
+		<rentalCost>1700</rentalCost>
+		<mealPP>
+			<low>11</low>
+			<high>15</high>
+		</mealPP>
+	</venue>
+	
+	<venue>
+		<name>Slattery Vintage Estates</name>
+		<location>Nehawka</location>
+		<rentalCost>2500</rentalCost>
+		<mealPP>
+			<low>12.50</low>
+			<mid>15.50</mid>
+			<high>18.50</high>
+		</mealPP>
+	</venue>
+	
+</venues>

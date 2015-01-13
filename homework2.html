@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="homework2style.css">
+	
+	<title>Jen Anderson Homework 2</title>
+	
+	<!--Declare the character encoding-->
+	<meta charset="UTF-8">
+	
+	<script src="jquery-1.10.2.min.js"></script>
+
+	<script>
+		/*function executes when DOM is fully loaded*/
+		$(document).ready(function() 
+		{
+			$("#clickme").bind("click", function() 
+			{
+				$.ajax({url:"weddinginfo.xml", dataType:"xml", success:callbackFunction, error:errorFunction});
+   	
+				function callbackFunction(data,info) 
+				{
+					var venues=$(data).find("name");
+					var locations=$(data).find("location");
+					var costs=$(data).find("rentalCost");
+			
+					if(venues && venues.length && locations && locations.length && costs && costs.length) 
+					{
+						var myTable="<table align = left, cellpadding = 10><tr><th>Name</th><th>Cost of rental</th><th>Location</td></th>";
+						for(var i = 0; i < venues.length; i++)
+						{
+							myTable+= "<tr><td>" + $(venues[i]).text(); 
+							myTable+= "<td>" + $ (costs[i]).text();
+							myTable+= "<td>" + $(locations[i]).text(); 
+							myTable+= "</td></tr>";
+						}
+						myTable+= "<table>";
+
+						$("#infohere").html(myTable);
+						$("#weddinginfo").show();
+					} 
+					else
+						errorFunction(data, "No venues here!");	
+  		 
+					try 
+					{
+						localStorage["venues"] = venues;
+						localStorage["locations"] = locations;
+						localStorage["rentalPrice"] = costs;
+					} 
+					catch (e) 
+					{
+						$.cookie("venues", venues);
+						$.cookies$("locations",locations);
+						$.cookie("rentalPrice", costs);		
+					}
+				}
+
+				function errorFunction(data,info) 
+				{
+					$("#clickme").text("error occurred:"+info);
+					$("#weddinginfo").hide();
+				}
+			});
+		});
+	</script>
+ </head>
+ <body>
+   <h1>Get my wedding planning information here!!</h1><br>
+
+   <div id="clickme">
+   <button type="button">Click Me!</button>		
+   </div><BR><BR>
+
+   <div id="weddinginfo">					
+   <div id="infohere"></div>				
+   </div>
+</body>
+</html>
+
+
